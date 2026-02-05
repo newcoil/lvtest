@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Webklex\IMAP\Facades\Client;
 use Maatwebsite\Excel\Facades\Excel;
-use Exception;
 
 
 class SyncPolcarPrices extends Command
