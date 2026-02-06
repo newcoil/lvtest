@@ -107,7 +107,7 @@ class SyncPolcarPrices extends Command
 
                     if (str_starts_with($attachment->getContentType(), 'application/vnd')) {
 
-                        $fileName = $muid."_".$attachment->name;
+                        $fileName = $muid . "_" . $attachment->name;
 
                         $fullFileName = storage_path('app\prices\contractor_11') . '\\' . $fileName;
 
@@ -127,10 +127,10 @@ class SyncPolcarPrices extends Command
                         //запись processed_mail_items
 
                         $mailItem = [
-                                'name'=> $fileName,
-                                'uid'=> $muid,
-                                'created_at'=> now(),
-                                'updated_at'=> now(),
+                                'name' => $fileName,
+                                'uid' => $muid,
+                                'created_at' => now(),
+                                'updated_at' => now(),
                         ];   
                         
                         DB::table('processed_mail_items')->insert($mailItem);
@@ -166,22 +166,22 @@ class SyncPolcarPrices extends Command
                                     //создаем строку для contractor_prices                                        
 
                                     $price = [
-                                        'article_id'=> $data[$ii][0],
-                                        'price'=> (float)strtr($data[$ii][3], ',', '.'), //конвертируем эксел формат для sql decimal, запятые в точки
-                                        'amount'=> intval($data[$ii][6]),                   
-                                        'contractor_id'=> 11,
-                                        'delivery_date'=> null, 
-                                        'created_at'=> now(),
-                                        'updated_at'=> now(),
+                                        'article_id' => $data[$ii][0],
+                                        'price' => (float)strtr($data[$ii][3], ',', '.'), //конвертируем эксел формат для sql decimal, запятые в точки
+                                        'amount' => intval($data[$ii][6]),                   
+                                        'contractor_id' => 11,
+                                        'delivery_date' => null, 
+                                        'created_at' => now(),
+                                        'updated_at' => now(),
                                     ];
 
                                     //добавляем строку в CVS                                        
 
-                                    $csvData = $csvData . $data[$ii][0] .",".(float)strtr($data[$ii][3], ',', '.').",".intval($data[$ii][6])."\n";
+                                    $csvData = $csvData . $data[$ii][0] . "," .(float)strtr($data[$ii][3], ',', '.') . "," . intval($data[$ii][6])."\n";
 
                                     //если записи еще не добавлялись и старые данные не удалены
 
-                                    if($this->isUpdated==0){
+                                    if($this->isUpdated == 0){
 
                                         //удаляем старые данные из таблицы
                                         DB::table('contractor_prices')->where('contractor_id', 11)->delete();
@@ -208,11 +208,11 @@ class SyncPolcarPrices extends Command
                                 $this->info("Отправляем отчет SCV");
                                 $this->report($iii,$rows, $csvData);
                                 $this->info("Отчет SCV отправлен");
-                                $this->info("Обновлено ".$iii." строк из прайса ( всего ".$rows." строк )");
+                                $this->info("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )");
                                 return;
                             } else {
                                 $this->info("Данные для обновления отсутствуют в файле");
-                                $this->info("Обновлено ".$iii." строк из прайса ( всего ".$rows." строк )");    
+                                $this->info("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )");    
                             }
 
                         } // else содержимое файла не соответствует = не прайс
