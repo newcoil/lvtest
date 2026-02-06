@@ -23,7 +23,7 @@ class SyncPolcarPrices extends Command
      *
      * @var string
      */
-    protected $description = 'Test Test Test';
+    protected $description = 'IMAP-прайсинг + обновление наличия/цен + отчёт';
 
 
 
@@ -205,9 +205,9 @@ class SyncPolcarPrices extends Command
                             //если актуальные строки были найдены и добавлены
 
                             if($iii > 0){
-                                $this->info("Отправляем отчет SCV");
+                                $this->info("Отправляем отчет CSV");
                                 $this->report($iii, $rows, $csvData);
-                                $this->info("Отчет SCV отправлен");
+                                $this->info("Отчет CSV отправлен");
                                 $this->info("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )");
                                 return;
                             } else {
@@ -260,7 +260,7 @@ class SyncPolcarPrices extends Command
     }
    
     /**
-     * отправка отчета c cvs
+     * отправка отчета c csv
      */    
     protected function report($iii, $rows, $csvData) 
     {
