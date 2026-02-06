@@ -78,7 +78,7 @@ class SyncPolcarPrices extends Command
 
         //обратный перебор начиная с новых // IMAP Client НЕ ПОЗВОЛЯЕТ desc сортировку для foreach
 
-        for ($i=$mcount-1; $i>=0; $i--) {
+        for ($i = $mcount - 1; $i >= 0; $i--) {
             $message = $messages[$i];
             $attachment = $message->getAttachments()->count();
 
