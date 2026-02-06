@@ -103,7 +103,7 @@ class SyncPolcarPrices extends Command
 
                     //ищем MIME тип файла эксела во вложении
 
-                    if ( str_starts_with($attachment->getContentType(), 'application/vnd') && str_contains($attachment->name, '.xls') ) {
+                    if ( str_starts_with($attachment->getContentType(), 'application/vnd.openxmlformats') && str_contains($attachment->name, '.xls') ) {
 
                         $fileName = $muid . "_" . $attachment->name;
 
