@@ -141,7 +141,7 @@ class SyncPolcarPrices extends Command
 
                         //общее количество строк без заголовка  
 
-                        $rows = count($data)-1;
+                        $rows = count($data) - 1;
 
                         //проверяем файл по содержимому - наличие строк и названия первых двух заголовков столбцов
 
@@ -206,13 +206,13 @@ class SyncPolcarPrices extends Command
 
                             if($iii > 0){
                                 $this->info("Отправляем отчет SCV");
-                                $this->report($iii,$rows, $csvData);
+                                $this->report($iii, $rows, $csvData);
                                 $this->info("Отчет SCV отправлен");
                                 $this->info("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )");
                                 return;
                             } else {
                                 $this->info("Данные для обновления отсутствуют в файле");
-                                $this->info("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )");    
+                                $this->info("Обновлено 0 строк из прайса ( всего " . $rows . " строк )");    
                             }
 
                         } // else содержимое файла не соответствует = не прайс
