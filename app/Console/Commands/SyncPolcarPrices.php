@@ -25,8 +25,6 @@ class SyncPolcarPrices extends Command
      */
     protected $description = 'IMAP-прайсинг + обновление наличия/цен + отчёт';
 
-
-
     /**
      * индикатор процесса обновления данных.
      * если 0 данные еще не обновлялись
@@ -84,7 +82,7 @@ class SyncPolcarPrices extends Command
 
             //находим письмо с прикрепленным файлом\файлами
 
-            if($attachment > 0){
+            if ($attachment > 0) {
 
                 //получаем IMAP ID для уникализации имени файла, сохраняемого на сервере
                 //!!!! IMAP ID уникален только в пределах своей папки! (INBOX);
@@ -93,7 +91,7 @@ class SyncPolcarPrices extends Command
 
                 //проверка по processed_mail_items
 
-                if($muid == $this->lastRecord()[0]){
+                if ($muid == $this->lastRecord()[0]) {
                     //данное письмо самое новое и УЖЕ обработано
                     $this->info("Новых писем нет"); 
                     return;
@@ -181,7 +179,7 @@ class SyncPolcarPrices extends Command
 
                                     //если записи еще не добавлялись и старые данные не удалены
 
-                                    if($this->isUpdated == 0){
+                                    if ($this->isUpdated == 0) {
 
                                         //удаляем старые данные из таблицы
                                         DB::table('contractor_prices')->where('contractor_id', 11)->delete();
@@ -204,7 +202,7 @@ class SyncPolcarPrices extends Command
 
                             //если актуальные строки были найдены и добавлены
 
-                            if($iii > 0){
+                            if ($iii > 0) {
                                 $this->info("Отправляем отчет CSV");
                                 $this->report($iii, $rows, $csvData);
                                 $this->info("Отчет CSV отправлен");
@@ -241,7 +239,6 @@ class SyncPolcarPrices extends Command
         foreach ($pins as $pin) {
             $apins[] = $pin->oem;
         }
-        // $apins = [];
         return($apins);
     }
 
@@ -264,14 +261,14 @@ class SyncPolcarPrices extends Command
      */    
     protected function report($iii, $rows, $csvData) 
     {
-            Mail::raw("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )", function ($message) use ($csvData) {
-                $message->to(env("REPORT_EMAIL_TO"))
-                                                ->subject('ОТЧЕТ CSV')
-                                                ->attachData($csvData, 'report.csv', [
-                                                    'mime' => 'text/csv',
-                                                ]);
-            });
-            return true;
+        Mail::raw("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )", function ($message) use ($csvData) {
+        $message->to(env("REPORT_EMAIL_TO"))
+                                        ->subject('ОТЧЕТ CSV')
+                                        ->attachData($csvData, 'report.csv', [
+                                            'mime' => 'text/csv',
+                                        ]);
+        });
+        return true;
     }
 
 
