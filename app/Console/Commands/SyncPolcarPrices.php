@@ -53,7 +53,7 @@ class SyncPolcarPrices extends Command
         //проверяем существует ли нужная папка (INBOX) на сервере
         
         if (!$folder) {
-            $this->info("Папка " .env('IMAP_FOLDER'). " в почте не найдена");
+            $this->info("Папка " . env('IMAP_FOLDER') . " в почте не найдена");
             $this->info("Проверьте настройки IMAP_FOLDER в .env");
             return;
         }
@@ -251,10 +251,10 @@ class SyncPolcarPrices extends Command
      */
     protected function lastRecord() 
     {
-        $nameUid = [0,'not_exist.xlsx','2026-01-05 13:06:36'];  
+        $nameUid = [0, 'not_exist.xlsx', '2026-01-05 13:06:36'];  
         $record = DB::table('processed_mail_items')->orderBy('created_at', 'desc')->first();
         if($record){ //запись существует
-            $nameUid = [$record->uid,$record->name,$record->created_at];  
+            $nameUid = [$record->uid, $record->name, $record->created_at];  
         }
         return($nameUid);
     }
@@ -264,7 +264,7 @@ class SyncPolcarPrices extends Command
      */    
     protected function report($iii, $rows, $csvData) 
     {
-            Mail::raw("Обновлено ".$iii." строк из прайса ( всего ".$rows." строк )", function ($message) use ($csvData) {
+            Mail::raw("Обновлено " . $iii . " строк из прайса ( всего " . $rows . " строк )", function ($message) use ($csvData) {
                 $message->to(env("REPORT_EMAIL_TO"))
                                                 ->subject('ОТЧЕТ CSV')
                                                 ->attachData($csvData, 'report.csv', [
