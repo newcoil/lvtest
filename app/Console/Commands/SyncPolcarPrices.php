@@ -187,7 +187,7 @@ class SyncPolcarPrices extends Command
                                         DB::table('contractor_prices')->where('contractor_id', 11)->delete();
                                         
                                         //указываем, что старые данные уже удалены и обновление в процессе
-                                        $this->isUpdated=1;
+                                        $this->isUpdated = 1;
                                     }
 
                                     //добавляем строку в contractor_prices
