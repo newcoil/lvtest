@@ -239,7 +239,7 @@ class SyncPolcarPrices extends Command
         foreach ($pins as $pin) {
             $apins[] = $pin->oem;
         }
-        return($apins);
+        return $apins;
     }
 
     /**
@@ -253,7 +253,7 @@ class SyncPolcarPrices extends Command
         if($record){ //запись существует
             $nameUid = [$record->uid, $record->name, $record->created_at];  
         }
-        return($nameUid);
+        return $nameUid;
     }
    
     /**
